@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>task 1</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <style>
+            html{
+                background-image: url(https://thedaily.case.edu/wp-content/uploads/2023/06/underwater-view.jpg);
+                background-size: cover;
+                background-position: center center;
+                background-repeat: no-repeat;
+                height: 100%;
+            }
+            #button{
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                width:70%;
+                height:25%;
+                font-family: "Luckiest Guy", cursive;
+                text-align:center;
+                border-radius: 20px;
+                border:black 0.1px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 100%;
+                align-items:center;
+                background-color:black;
+                
+            }
+            .thing{
+                margin:10px;
+                font-size: 15vw;
+                background-image:url(https://it.usembassy.gov/wp-content/uploads/sites/67/20230312bemb750x450.jpg);
+                background-size:cover;
+                background-clip:text;
+                -webkit-background-clip: text;
+                color:transparent;
+            }
+            .label{
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 5%;
+                font-size:6.5vw;
+                font-family: "Luckiest Guy", cursive;
+                color:white;
+            }
+            .timer{
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 19%;
+                font-size:6.5vw;
+                font-family: "Luckiest Guy", cursive;
+                color:white;
+            }
+            .cointaner{
+                position:relative;
+            }
+        </style>
+    </head>
+    <body>
+       
+        <h1 class="label">goal: 6cps</h1>
+        <div class="cointainer">
+            <button id="button">
+                <h1 class="thing">start</h1>
+            </button>
+            <h1 class="timer"></h1>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            var seconds = 5;
+            var totaltimeforclicks = seconds*100;
+            var clicks = 0;
+            var started = "no";
+            const clickee = document.getElementById('button');
+            clickee.addEventListener('click', function() {
+                if (started=="no"){
+                    clicks = 0;
+                    $(".thing").html("click me");
+                    delay();
+                    started = "yes";
+
+                }
+                if (started=="yes"){
+                    clicks += 1;
+                    console.log("clicked");
+                    $(".label").html(clicks);
+                };
+            });
+
+
+            let i =0;
+            var timernumbers = 0;
+            const totalIterations = totaltimeforclicks+1;
+            function delay() {
+                timernumbers = (0.01*(totaltimeforclicks-i)).toFixed(2);
+                $(".timer").html(`time left: ${timernumbers}`);
+                i++;
+                if (i < totalIterations) {
+                    setTimeout(delay, 10);
+                } else {
+                    started = "no";
+                    i = 0;
+                    const cps = clicks/seconds;
+                    $(".timer").html(`your cps is ${cps}`)
+                    $(".thing").html("start");
+                    if (cps>=6){
+                        alert("Congratulations! You have won the goal of six clicks per second! Visit this site to see the details to come to my birthday party!: https://ilikedinosaurs111.github.io/partyDetails/");
+                    } else {
+                        alert("Sorry! You have not gotten the goal of six clicks per second. Try again until you get it!")
+                    }
+                };
+            };
+            
+
+        </script>
+    </body>
+</html>
